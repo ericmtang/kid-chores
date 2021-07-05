@@ -8,20 +8,34 @@ import {
 } from "react-navigation-tabs";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Icon, Header } from "react-native-elements";
-
 import Tab from "./TabComponent";
-import ChildChores from './ChildChoresComponent'
+import ChildChores from "./ChildChoresComponent";
+import ChildBehavior from "./ChildBehaviorComponent";
+import ChildRewards from "./ChildRewardsComponent";
+import ParentChores from "./ParentChoresComponent";
+import ParentBehavior from "./ParentBehaviorComponent";
+import { useSelector, useDispatch } from "react-redux";
 
 const ParentNavigator = createMaterialTopTabNavigator({
-  ChoreList: { screen: Tab },
-  BehaviorList: { screen: Tab },
-  Configuration: { screen: Tab },
+  ChoreList: {
+    screen: ParentChores,
+    navigationOptions: {
+      tabBarLabel: "Chore List",
+    },
+  },
+  BehaviorList: {
+    screen: ParentBehavior,
+    navigationOptions: {
+      tabBarLabel: "Behavior List",
+    },
+  },
+  Settings: { screen: Tab },
 });
 
 const ChildNavigator = createMaterialTopTabNavigator({
   Chores: { screen: ChildChores },
-  Behaviors: { screen: Tab },
-  Redeem: { screen: Tab },
+  Behaviors: { screen: ChildBehavior },
+  Rewards: { screen: ChildRewards },
 });
 
 const MainNavigator = createMaterialBottomTabNavigator(
@@ -55,20 +69,21 @@ const MainNavigator = createMaterialBottomTabNavigator(
 
 const AppNavigator = createAppContainer(MainNavigator);
 
-class Main extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header
-          placement="left"
-          leftComponent={{ icon: "menu", color: "#fff" }}
-          centerComponent={{ text: "GOOD KID!", style: { color: "#fff" } }}
-          rightComponent={{ icon: "home", color: "#fff" }}
-        />
-        <AppNavigator />
-      </View>
-    );
-  }
+export default function Main() {
+  const score = 6;
+  const now = new Date();
+  return (
+    <View style={styles.container}>
+      <Header
+        leftComponent={
+          <Text style={{ color: "#fff" }}>{now.toLocaleDateString()}</Text>
+        }
+        centerComponent={{ text: "GOOD KID!", style: { color: "#fff" } }}
+        rightComponent={<Text style={styles.headerScore}>Points: {score}</Text>}
+      />
+      <AppNavigator />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -99,6 +114,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 24,
   },
+  headerScore: {
+    color: "#000",
+    backgroundColor: "#fff",
+    padding: 3,
+    borderRadius: 3,
+  },
 });
-
-export default Main;

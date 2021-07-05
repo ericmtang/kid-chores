@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
 import { Card } from "react-native-elements";
-import { CHORES } from "../shared/chores";
+import { REWARDS } from "../shared/rewards";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function ChildBehaviors() {
-  const behaviors = useSelector((state) => state.behaviors);
+export default function ChildRewards() {
+  const rewards = useSelector((state) => state.rewards);
   const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={behaviors}
+        data={rewards}
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Text>{item.name}</Text>

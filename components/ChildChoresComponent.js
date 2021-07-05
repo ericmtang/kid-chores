@@ -1,21 +1,24 @@
-import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
 import { Card } from "react-native-elements";
+import { CHORES } from "../shared/chores";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function ChildChores() {
+  // const [chores, setChores] = useState(CHORES);
+  const chores = useSelector((state) => state.chores);
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       <FlatList
-        data={[
-          { key: "Brush Teeth" },
-          { key: "Get Dressed" },
-          { key: "Eat Breakfast" },
-        ]}
+        data={chores}
         renderItem={({ item }) => (
-          <Card style={styles.item}>
-            <Text>{item.key}</Text>
-          </Card>
+          <View style={styles.item}>
+            <Text>{item.name}</Text>
+          </View>
         )}
+        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );
@@ -24,11 +27,14 @@ export default function ChildChores() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 22,
+    margin: 22,
   },
   item: {
+    backgroundColor: "#ffffff",
     padding: 10,
-    fontSize: 18,
+    margin: 5,
+    fontSize: 20,
     height: 44,
+    borderRadius: 10,
   },
 });
