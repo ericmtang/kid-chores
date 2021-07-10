@@ -6,36 +6,30 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  SafeAreaView,
-  SectionList,
 } from "react-native";
 import { Card } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
 import { addPoints } from "../redux/ActionCreators";
 import Accordion from "react-native-collapsible/Accordion";
 
-export default function ParentBehavior() {
+export default function ChildBehavior() {
   const behaviors = useSelector((state) => state.behaviors);
   const behaviorQ = useSelector((state) => state.behaviorQueue);
-  console.log("ParentBehavior: ", behaviors, behaviorQ);
+  console.log("ChildBehavior: ", behaviors, behaviorQ);
   const dispatch = useDispatch();
   const [activeSections, setActiveSections] = useState([2]);
-  const [updatedList, setUpdatedList] = useState(false);
   const [sections, setSections] = useState([
     {
-      title: "Approved Behaviors",
-      content: behaviorQ.filter((item) => item.approval !== null),
-      listType: "renderApproved",
+      title: "Confirmed Behaviors",
+      content: behaviorQ.filter(item=>item.approval !== null)
     },
     {
-      title: "Behaviors Pending Approval",
-      content: behaviorQ.filter((item) => item.approval === null),
-      listType: "renderPending",
+      title: "Pending Behaviors",
+      content: behaviorQ.filter(item=>item.approval === null)
     },
     {
-      title: "Add Behavior to Score",
+      title: "Select Behaviors",
       content: behaviors,
-      listType: "renderBehaviors",
     },
   ]);
 
@@ -43,7 +37,7 @@ export default function ParentBehavior() {
     console.log("renderHeader");
     return (
       <View style={styles.header}>
-        <Text style={styles.headerText}>{section.title}</Text>
+        <Text style={styles.headerText}>{section.title} ({section.content.length})</Text>
       </View>
     );
   };
@@ -80,29 +74,18 @@ export default function ParentBehavior() {
     );
   };
 
-  const Item = ({ title }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  );
-
   const updateSections = (activeSections) => {
     setActiveSections(activeSections);
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <SectionList
-        sections={sections}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={(item) => renderContent(item)}
-        renderSectionHeader={(item) => (
-          <Text style={styles.header}>
-            {item.title}
-          </Text>
-        )}
-      />
-    </SafeAreaView>
+    <Accordion
+      sections={sections}
+      activeSections={activeSections}
+      renderHeader={renderHeader}
+      renderContent={renderContent}
+      onChange={updateSections}
+    />
   );
 }
 

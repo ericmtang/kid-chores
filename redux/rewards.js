@@ -7,10 +7,13 @@ export const rewards = (state = REWARDS, action) => {
       return state.concat(action.payload);
 
     case ActionTypes.EDIT_REWARD:
-      return state;
+      return REWARDS;
 
     case ActionTypes.DELETE_REWARD:
-      return state.filter((reward) => reward !== action.payload);
+      return state.filter((reward) => reward.id !== action.payload);
+
+    case ActionTypes.RESET_REWARDS:
+      return REWARDS;
 
     default:
       return state;

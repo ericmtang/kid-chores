@@ -1,36 +1,35 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
-import { Card, CheckBox } from "react-native-elements";
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  CheckBox,
+} from "react-native";
+import { Card } from "react-native-elements";
 import { CHORES } from "../shared/chores";
 import { useSelector, useDispatch } from "react-redux";
-import { completeChore } from "../redux/ActionCreators";
+import { completeChore } from "../redux/ActionCreators"
 import ListItemSwipeable from "react-native-elements/dist/list/ListItemSwipeable";
 
 export default function ChildChores() {
   // const [chores, setChores] = useState(CHORES);
   const chores = useSelector((state) => state.chores);
-  console.log(chores);
+  console.log(chores)
   const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
       <FlatList
-        data={[...chores].sort(function (a, b) {
-          return (
-            (b.completed == null) - (a.completed == null) ||
-            -(a > b) ||
-            +(a < b)
-          );
-        })}
+        data={chores}
         renderItem={({ item }) => (
           <View style={styles.item}>
             <Text style={styles.itemText}>{item.name}</Text>
-            {item.completed != null && (
-              <Text style={styles.itemText}>Done: {item.completed}</Text>
-            )}
+            { item.completed != null && <Text style={styles.itemText}>Done: {item.completed}</Text>}
             <CheckBox
-              checked={item.completed !== null}
-              onPress={() => dispatch(completeChore(item.id))}
+              value={item.completed !== null}
+              onValueChange={() => dispatch(completeChore(item.id))}
             />
           </View>
         )}

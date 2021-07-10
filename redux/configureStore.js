@@ -4,6 +4,8 @@ import { chores } from "./chores";
 import { behaviors } from "./behaviors";
 import { rewards } from "./rewards";
 import { settings } from "./settings";
+import { behaviorQueue } from "./behaviorqueue";
+import { rewardsQueue } from "./rewardsqueue";
 import { persistStore, persistCombineReducers } from "redux-persist";
 // import storage from "redux-persist/lib/storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,6 +23,8 @@ export const ConfigureStore = () => {
       behaviors,
       rewards,
       settings,
+      behaviorQueue,
+      rewardsQueue,
     }),
     applyMiddleware(thunk)
   );
