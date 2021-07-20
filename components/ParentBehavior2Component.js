@@ -4,10 +4,9 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
-import { Card, Button, Icon } from "react-native-elements";
+import { Button, Icon } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
 import { addPoints, deleteBehaviorQ, addBehaviorQ, approveBehaviorQ } from "../redux/ActionCreators";
 import Accordion from "react-native-collapsible/Accordion";
@@ -41,7 +40,7 @@ export default function ParentBehavior() {
     setUpdatedList(!updatedList);
   }, [sections]);
 
-  const renderHeader = (section, _, isActive) => {
+  const renderHeader = (section) => {
     console.log("renderHeader");
     return (
       <View style={styles.header}>

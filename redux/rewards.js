@@ -7,7 +7,10 @@ export const rewards = (state = REWARDS, action) => {
       return state.concat(action.payload);
 
     case ActionTypes.EDIT_REWARD:
-      return REWARDS;
+      console.log("editRewardReducer: ", action.payload)
+      return state.map((item) =>
+        item.id == action.payload.id ? action.payload : item
+      );
 
     case ActionTypes.DELETE_REWARD:
       return state.filter((reward) => reward.id !== action.payload);

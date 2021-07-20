@@ -20,6 +20,7 @@ export default function EditChores() {
 
   const [modal, setModal] = useState(false);
   const [newChore, setNewChore] = useState({
+    id: "",
     name: "",
     completed: null,
   });
@@ -29,13 +30,28 @@ export default function EditChores() {
   };
 
   const resetForm = () => {
-    setNewChore({ name: "", completed: null });
+    setNewChore({ id: "", name: "", completed: null });
   };
 
   const submitForm = () => {
-    const now = new Date();
-    dispatch(addChore({ ...newChore, id: now, completed: null }));
-    toggleModal();
+    console.log("submitForm: ", newChore);
+    if (newChore.id === "") {
+      const now = new Date();
+      dispatch(
+        addChore({
+          ...newChore,
+          id: now,
+        })
+      );
+      toggleModal();
+    } else {
+      dispatch(
+        editChore({
+          ...newChore,
+        })
+      );
+      toggleModal();
+    }
   };
 
   return (
@@ -56,7 +72,10 @@ export default function EditChores() {
                 />
               }
               buttonStyle={styles.itemButton}
-              onPress={() => dispatch(editChore())}
+              onPress={() => {
+                setNewChore(item);
+                toggleModal();
+              }}
             />
             <Button
               icon={
@@ -90,7 +109,7 @@ export default function EditChores() {
             placeholder="New Chore"
             leftIcon={{ type: "font-awesome", name: "check-square" }}
             leftIconContainerStyle={{ paddingRight: 10 }}
-            onChangeText={(chore) => setNewChore({ name: chore })}
+            onChangeText={(chore) => setNewChore({...newChore, name: chore })}
             value={newChore.name}
           ></Input>
           <View style={{ margin: 10 }}>

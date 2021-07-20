@@ -13,7 +13,7 @@ import ChildChores from "./ChildChoresComponent";
 //import ChildBehavior from "./ChildBehavior2Component";
 //import ChildRewards from "./ChildRewardsComponent";
 import ParentChores from "./ParentChoresComponent";
-//import ParentBehavior from "./ParentBehavior3Component";
+//import ParentBehavior from "./ParentBehavior2Component";
 //import ParentRewards from "./ParentRewardsComponent"
 import ParentSettings from "./ParentSettingsComponent";
 import EditChores from "./EditChoresComponent";
@@ -43,7 +43,7 @@ function PendingBehaviors() {
 }
 function CompletedBehaviors() {
   const behaviorQ = useSelector((state) => state.behaviorQueue);
-  return behaviorQ.filter((item) => item.approved !== null).length;
+  return behaviorQ.filter((item) => item.approval !== null).length;
 }
 
 const ChildRewards = createMaterialTopTabNavigator(

@@ -8,8 +8,9 @@ export const addChore = chore => ({
     type: ActionTypes.ADD_CHORE,
     payload: chore
 });
-export const editChore = () => ({
+export const editChore = chore => ({
     type: ActionTypes.EDIT_CHORE,
+    payload: chore
 });
 export const completeChore = id => ({
     type: ActionTypes.COMPLETE_CHORE,
@@ -53,8 +54,9 @@ export const addReward = reward => ({
     type: ActionTypes.ADD_REWARD,
     payload: reward
 });
-export const editReward = () => ({
+export const editReward = reward => ({
     type: ActionTypes.EDIT_REWARD,
+    payload: reward
 });
 
 

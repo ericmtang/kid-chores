@@ -19,12 +19,12 @@ export default function EditRewards() {
 
   const [modal, setModal] = useState(false);
   const [newReward, setNewReward] = useState({
+    id: "",
     name: "",
-    points: "",
+    points: 0,
   });
 
   const toggleModal = (event) => {
-    console.log("Event: ", event);
     setModal(!modal);
   };
 
@@ -33,9 +33,26 @@ export default function EditRewards() {
   };
 
   const submitForm = () => {
-    const now = new Date();
-    dispatch(addReward({ ...newReward, id: now, points: -Number(newReward.points) }));
-    toggleModal();
+    console.log("submitForm: ", newReward);
+    if (newReward.id === "") {
+      const now = new Date();
+      dispatch(
+        addReward({
+          ...newReward,
+          id: now,
+          points: Number(newReward.points),
+        })
+      );
+      toggleModal();
+    } else {
+      dispatch(
+        editReward({
+          ...newReward,
+          points: Number(newReward.points),
+        })
+      );
+      toggleModal();
+    }
   };
 
   return (
@@ -58,7 +75,10 @@ export default function EditRewards() {
                 />
               }
               buttonStyle={styles.itemButton}
-              onPress={() => dispatch(editReward())}
+              onPress={() => {
+                setNewReward(item);
+                toggleModal();
+              }}
             />
             <Button
               icon={

@@ -7,7 +7,10 @@ export const chores = (state = CHORES, action) => {
       return state.concat(action.payload);
 
     case ActionTypes.EDIT_CHORE:
-      return CHORES;
+      console.log("editChoreQueueReducer: ", action.payload);
+      return state.map((item) =>
+        item.id == action.payload.id ? action.payload : item
+      );
 
     case ActionTypes.DELETE_CHORE:
       return state.filter((chore) => chore.id !== action.payload);
