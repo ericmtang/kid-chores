@@ -1,14 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, Text, ScrollView } from "react-native";
-import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
-import {
-  createBottomTabNavigator,
-  createMaterialTopTabNavigator,
-} from "react-navigation-tabs";
+import { createMaterialTopTabNavigator } from "react-navigation-tabs";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { Icon, Header } from "react-native-elements";
-import Tab from "./TabComponent";
 import ChildChores from "./ChildChoresComponent";
 //import ChildBehavior from "./ChildBehavior2Component";
 //import ChildRewards from "./ChildRewardsComponent";
