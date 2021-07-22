@@ -16,7 +16,17 @@ export const BEHAVIORS = [
   },
   {
     id: 3,
-    name: "100 Jumping Jacks",
+    name: "Do Jumping Jacks",
     points: 1,
+  },
+  {
+    id: 4,
+    name: "Feed/Water Pets",
+    points: 1,
+  },
+  {
+    id: 5,
+    name: "Clean Room",
+    points: 2,
   },
 ];

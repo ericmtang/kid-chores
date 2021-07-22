@@ -8,20 +8,20 @@ export const REWARDSQUEUE = [
     {
       id: 1,
       name: "Video Games",
-      points: -2,
+      points: -5,
       fulfilled: null,
     },
     {
       id: 2,
       name: "Lego Set",
-      points: -10,
-      fulfilled: null,
+      points: -25,
+      fulfilled: "fulfilled",
     },
     {
       id: 3,
       name: "Cheez Its",
       points: -1,
-      fulfilled: null,
+      fulfilled: "fulfilled",
     },
   ];
   

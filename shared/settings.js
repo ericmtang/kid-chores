@@ -1,4 +1,4 @@
 export const SETTINGS = {
-  pointsToday: 7,
+  pointsToday: 10,
   pointsTotal: 0,
 };
