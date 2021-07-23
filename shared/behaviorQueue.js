@@ -19,7 +19,7 @@ export const BEHAVIORQUEUE = [
   },
   {
     id: 3,
-    name: "100 Jumping Jacks",
+    name: "Do Jumping Jacks",
     points: 1,
     approval: "confirmed",
   },
